@@ -1,52 +1,47 @@
 <!DOCTYPE html>
-<!----------------------!
- ! SJ-Static | by VAPOR
- !---------------------->
+<!--
+  Hey you! Yeah, you reading this like a curious little nerd.
+  This is Road.js' "I kinda know what I'm doing" browser proxy.
+  Warning: I hate HTML. I hate static pages. I still made this. Somehow.
+  Don't @ me. Just enjoy the chaos. 💀❤️
+-->
 <html lang="en">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Browser</title>
+  <title>Browser of Doom</title>
   <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+
   <style>
+    /* General body / HTML chaos */
     body,
     html,
     #app {
-      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont,
-        sans-serif;
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
       width: 100vw;
       height: 100vh;
       margin: 0;
       padding: 0;
-      background: var(--bg);
+      background: var(--bg); /* pro hint: change this to purple if you want to annoy your coworkers */
       overflow: hidden;
     }
 
+    /* Fade in animation for dramatic entrances */
     @keyframes fade {
-      from {
-        opacity: 0;
-      }
-
-      to {
-        opacity: 1;
-      }
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
 
+    /* Spin your problems away */
     @keyframes spin {
-      to {
-        transform: rotate(360deg);
-      }
+      to { transform: rotate(360deg); }
     }
 
-    .flex {
-      display: flex;
-    }
+    .flex { display: flex; }
+    .col { flex-direction: column; }
 
-    .col {
-      flex-direction: column;
-    }
-
+    /* Main container chaos */
     .browser-container {
       width: 100%;
       height: 100%;
@@ -58,23 +53,25 @@
       box-sizing: border-box;
     }
 
+    /* Links be fancy but chill */
     .browser-container a {
       color: var(--primary);
+      text-decoration: none; /* because who likes underlines? */
     }
 
+    /* Inputs and buttons try to behave */
     .browser-container input,
     .browser-container button {
-      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont,
-        sans-serif;
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
     }
 
+    /* Headings, because we must pretend we know what we're doing */
     .browser-container h1 {
-      font-family: "Inter", system-ui, -apple-system,
-        BlinkMacSystemFont, sans-serif;
       margin-bottom: 0;
       color: var(--text-color);
     }
 
+    /* iframe hell container */
     .browser-container iframe {
       background-color: #fff;
       border: none;
@@ -83,6 +80,7 @@
       width: 100%;
     }
 
+    /* Address bar that sometimes works */
     input.bar {
       font-family: "Inter";
       padding: 0.6rem 1rem;
@@ -101,11 +99,10 @@
       background-color: var(--button-hover);
     }
 
-    p {
-      margin: 0;
-      margin-top: 0.2em;
-    }
+    /* Tiny text tweaks */
+    p { margin: 0; margin-top: 0.2em; }
 
+    /* Nav buttons be snazzy */
     .nav {
       padding-top: 0.6rem;
       padding-bottom: 0.6rem;
@@ -128,6 +125,7 @@
       background-color: var(--button-hover);
     }
 
+    /* Tabs are a necessary evil */
     .tabs {
       padding-top: 0.6rem;
       padding-bottom: 0rem;
@@ -137,18 +135,10 @@
       white-space: nowrap;
     }
 
-    .tabs::-webkit-scrollbar {
-      height: 4px;
-    }
-
-    .tabs::-webkit-scrollbar-track {
-      background: transparent;
-    }
-
-    .tabs::-webkit-scrollbar-thumb {
-      background: var(--third-bg);
-      border-radius: 2px;
-    }
+    /* scrollbar because we can't just trust humans */
+    .tabs::-webkit-scrollbar { height: 4px; }
+    .tabs::-webkit-scrollbar-track { background: transparent; }
+    .tabs::-webkit-scrollbar-thumb { background: var(--third-bg); border-radius: 2px; }
 
     .tab {
       color: var(--text-color);
@@ -171,14 +161,10 @@
       font-size: 1rem;
     }
 
-    .tab.active {
-      background-color: var(--button-hover);
-    }
+    .tab.active { background-color: var(--button-hover); }
+    .tab:hover:not(.active) { background-color: var(--third-bg); }
 
-    .tab:hover:not(.active) {
-      background-color: var(--third-bg);
-    }
-
+    /* Because favicons deserve love too */
     .tab-favicon {
       width: 18px;
       height: 18px;
@@ -215,6 +201,7 @@
       color: var(--text-color);
     }
 
+    /* New tab button, aka "+", aka chaos initiator */
     .new-tab {
       color: var(--text-color);
       outline: none;
@@ -233,58 +220,30 @@
       font-size: 1.3rem;
     }
 
-    .new-tab:hover {
-      background-color: var(--button-hover);
-    }
+    .new-tab:hover { background-color: var(--button-hover); }
 
-    .iframe-container {
-      flex: 1;
-      position: relative;
-    }
+    /* iframe container, because browsers need containers */
+    .iframe-container { flex: 1; position: relative; }
+    .iframe-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+    .iframe-container iframe.hidden { display: none; }
 
-    .iframe-container iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-    }
+    /* Sortable chaos */
+    .sortable-ghost { opacity: 0.5 !important; }
+    .sortable-drag { transform: rotate(2deg); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5); }
 
-    .iframe-container iframe.hidden {
-      display: none;
-    }
-
-    .sortable-ghost {
-      opacity: 0.5 !important;
-    }
-
-    .sortable-drag {
-      transform: rotate(2deg);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
-    }
-
-    .version {
-      color: var(--secondary-text-color) !important;
-      font-size: 1rem;
-      margin-left: auto;
-    }
-
-    .version b {
-      color: var(--text-color);
-    }
-
-    .config-btn {
-      display: none;
-    }
+    /* Version tag so you can brag about your proxy */
+    .version { color: var(--secondary-text-color) !important; font-size: 1rem; margin-left: auto; }
+    .version b { color: var(--text-color); }
+    .config-btn { display: none; }
   </style>
   <script src="https://cdn.jsdelivr.net/npm/dreamland"></script>
   <script src="/baremux/index.js"></script>
   <script src="/scram/scramjet.all.js"></script>
-  <script src="cHJveHk=_config.js"></script>
+  <script src="proxy.config.js"></script>
 </head>
 
 <body>
-  <div id="app"></div>
+  <div id="app"></div>  # A FUCK TONE OF HTML HERE IK
   <script>
     const { ScramjetController } = $scramjetLoadController();
     
