@@ -7,3 +7,5 @@ If you enjoy this goofy, barely-working static proxy, drop a like, a star, or ju
 Feel free to **mess with it** however the hell you want. Want to break it? Add memes? Spam dumb sh*t in the code? Go ahead. It’s your proxy now, not mine—so don’t slide into my DMs crying about it.  
 Real talk: programming is weird, life is weirder, and if you find a bug… probably it’s your fault, you magnificent dumbass. 😏  
 So, have a **lovely day**, don’t crash your tabs, and remember: **Road.js loves you… kind of… maybe… f*** it, love ya anyway.**
+
+theres like a tone of errors but i got different shit to do so cya. the main proxy logic works tho!!
