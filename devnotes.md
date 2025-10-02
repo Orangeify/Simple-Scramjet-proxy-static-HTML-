@@ -20,3 +20,41 @@
 - **Auth** → Firebase Auth (UUIDs for each user).  
 - **Email** → Gmail via [Google Workspace](https://workspace.google.com/).  
 - ⚠️ **AI Note**: I did use AI during development, but only for ideas and bug fixes when I got stuck. No vibe coding, no straight copy-paste.
+
+## User Data Safety
+- All user data is stored securely with per-user **encryption tokens**.  
+- Emails are encrypted at rest using a 64-character database encryption key.  
+- Privacy first → nothing is shared without the user’s consent.
+
+## Dev Program
+> ⚠️ These notes are out early. The dev program is not fully released yet, so things may change.  
+
+- **App Resources** → Each user currently gets **1 app** running at a time with:  
+  - 512MB RAM  
+  - 25% of a CPU core (1 core base)  
+  - 500MB of disk space (expandable if needed)  
+- **Game Assets** → Users get access to **500+ unblocked game assets** for free (not counted toward disk usage).  
+  - You can upload your own assets (games, images, auth systems, APIs, etc.)  
+  - Assets can be:  
+    - Free  
+    - Private (team-only)  
+    - Monetized for tokens/credits.  
+- **Domains** →  
+  - Free custom domain support.  
+  - Free auto SSL for subdomains like:  
+    ```
+    {AppId}.{region}.apps.nxtjs.com
+    ```  
+- **Git** → Every project gets a private Git link (password-protected). You can share your code globally or keep it private. _(Subject to change or removal)_  
+- **Databases** → Every app gets a DB:  
+  - Built-in custom DB (SQLite + Socket.IO)  
+  - Or external options like Firebase (more coming soon).  
+- **Auth** → Multiple options for app authentication:  
+  - Built-in Next Dev Auth  
+  - Firebase Auth  
+  - OAuth  
+  - Or bring your own system.  
+- **Env & Secrets** →  
+  - Even static apps are safe: JS files are encrypted per-app.  
+  - Hardcoding secrets is technically safe (still not recommended).  
+  - Custom `.env` system available, works the same as standard `.env`.  
