@@ -58,3 +58,36 @@
   - Even static apps are safe: JS files are encrypted per-app.  
   - Hardcoding secrets is technically safe (still not recommended).  
   - Custom `.env` system available, works the same as standard `.env`.  
+  
+  ## Security Notes
+- **API Rate Limiting** → All API endpoints are protected with rate limits to prevent spam, brute force attempts, or accidental flooding.  
+- **Auth Protection** → Login sessions are tied to per-user encryption tokens. Refresh tokens rotate automatically, and failed attempts are monitored.  
+- **Database Safety** → Firestore rules + custom server checks ensure users can only access their own data.  
+- **File Safety** → Uploaded files are sandboxed and scanned before being used by apps.  
+- **Encryption** → Every app has its own per-app encryption key for secrets, environment files, and sensitive data.  
+
+## Limitations / Known Issues
+- **CDN System** → While there’s a lot of storage available, the CDN setup is limited for now.  
+  - Images *may* work but are subject to moderation once an AI system is in place.  
+  - Until then, uploads are limited and not guaranteed to persist forever.  
+- **App Hosting** → The whole platform currently has **64GB RAM** available.  
+  - Each app requires **512MB RAM minimum**, so scaling is capped.  
+  - If usage spikes too high, I’ll need to explore new ways to optimize resource usage.  
+
+## Chat
+The chat system is in early stages but already works pretty well (UI + features are still coming).  
+
+### Planned Features
+- **Admin Moderation** →  
+  - Admins can delete messages, ban, mute, or kick users.  
+  - Users can buy a “get out of jail” card (20k–50k monyz) if the punishment isn’t severe.  
+- **Custom Channels & Groups** → Users will be able to create their own rooms with private or public settings.  
+- **Emotes & Reactions** → To make chat more fun and interactive.  
+
+### How Normal Chat Works
+- Users can send text messages in public or private rooms.  
+- Messages are stored in the database with timestamps + author IDs.  
+- Messages update live for all participants using snapshot listeners (realtime sync).  
+- Each user’s chat history is private to them unless in a shared room.  
+- Moderation is layered → system checks, then admin tools.  
+
